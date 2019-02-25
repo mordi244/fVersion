@@ -11,6 +11,8 @@ var Comment = require("./models/comment");
 var User = require("./models/user");
 var methodOverride = require("method-override");
 
+console.log("test");
+
 //var Comment = require("./models/comment");
 
 
