@@ -50,24 +50,21 @@ body {
 
 
 .slideshow li:nth-child(1) { 
-  background-image: url(http://i.imgur.com/K3mPv14.jpg) 
+  background-image: url(https://g77v3827gg2notadhhw9pew7-wpengine.netdna-ssl.com/wp-content/uploads/2017/03/kitten-anxiety_canna-pet-e1490739366728-1024x683.jpg) 
 }
 .slideshow li:nth-child(2) { 
-  background-image: url(http://i.imgur.com/SBEmFpv.jpg);
+  background-image: url(http://www.drpaws.com.au/lanecove/images/uploads/services/PuppyPreSchool_Banner_650x300.jpg);
   animation-delay: 10s; 
 }
 .slideshow li:nth-child(3) { 
-  background-image: url(http://i.imgur.com/emvhOnb.jpg);
+  background-image: url(http://www.pbs.org/wnet/nature/files/2017/09/x1WLcZn-asset-mezzanine-16x9-6kkb4dA.jpg);
   animation-delay: 20s; 
 }
 .slideshow li:nth-child(4) { 
-  background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
+  background-image: url(https://images.theconversation.com/files/224684/original/file-20180625-19399-13ecj91.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=754&fit=clip);
   animation-delay: 30s; 
 }
-.slideshow li:nth-child(5) { 
-  background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
-  animation-delay: 40s; 
-}
+
 
 /*give animation to our images
 /* we start the animation at 0 */

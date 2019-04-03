@@ -1,0 +1,21 @@
+<Configuration>
+  <Animals>
+    <Animal>חתול</Animal>
+    <Animal>כלב</Animal>
+    <Animal>עכבר</Animal>
+    <Animal>יונה</Animal>
+    <Animal>שועל</Animal>
+  </Animals>
+  <Categories>
+    <Category>פגר</Category>
+    <Category>אבד</Category>
+    <Category>שטט</Category>
+    <Category>מצא</Category>
+    <Category>סרס</Category>
+    <Category>נבח</Category>
+    <Category>פצע</Category>
+    <Category>התעללות</Category>
+    <Category>רעש</Category>
+    <Category>עקר</Category>
+  </Categories>
+</Configuration>

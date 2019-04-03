@@ -7,22 +7,31 @@ var flash = require("connect-flash");
 var passport = require("passport");
 var localStrategy = require("passport-local");
 var Campground = require("./models/campground");
-var Comment = require("./models/comment");
-var User = require("./models/user");
-var methodOverride = require("method-override");
 
-console.log("test");
+var methodOverride = require("method-override");
+var Animal = require("./models/animal");
+var Event = require("./models/event");
+
+
+//// json test 
+
+
+app.locals.jsondata = require("./data.json");
+
+
+////
+
 
 //var Comment = require("./models/comment");
 
 
 //requering routes
-var commentRoutes = require("./routes/comments");
-var campgroundRoutes = require("./routes/campgrounds");
-var indexRoutes = require("./routes/index");
 
-var seedDB = require("./seeds");
-mongoose.connect("mongodb://localhost/yelp_camp");
+var campgroundRoutes = require("./routes/campgrounds");
+
+
+
+mongoose.connect("mongodb://localhost/geovet");
 app.use(bodyparser.urlencoded({extended:true}));
 app.set("view engine","ejs");
 app.use(express.static(__dirname + "/public"));
@@ -39,11 +48,7 @@ app.use(require("express-session")({
     resave:false,
     saveUninitialized:false
 }));
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new localStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+
 
 
 
@@ -59,8 +64,8 @@ app.use(function(req,res,next) {
 
 
 app.use("/campgrounds",campgroundRoutes);
-app.use("/campgrounds/:id/comments",commentRoutes);
-app.use(indexRoutes);
+
+
 
 
 

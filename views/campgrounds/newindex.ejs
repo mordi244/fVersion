@@ -1,0 +1,1061 @@
+<% include ../partials/newheader %>
+<style>
+.center {
+  margin: 0 auto;
+  width: 50%;
+  padding: 20px;
+}
+.padd {
+	padding:30px;
+}
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 4px 5px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 5px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+
+</style>
+<div class="page-container">	
+   <div class="left-content">
+	   <div class="mother-grid-inner">
+            <!--header start here-->
+				<div class="header-main">
+					<div class="header-left">
+							<div class="logo-name">
+									 <a href="/campgrounds/newindex"> <h1>GeoVet</h1> 
+									<!--<img id="logo" src="" alt="Logo"/>--> 
+								  </a> 								
+							</div>
+							<!--search-box-->
+								<div class="search-box">
+									<form>
+										<input type="text" placeholder="Search..." required="">	
+										<input type="submit" value="">					
+									</form>
+								</div><!--//end-search-box-->
+							<div class="clearfix"> </div>
+						 </div>
+						 <div class="header-right">
+						
+							<!--notification menu end -->
+							<div class="profile_details">		
+								<ul>
+									<li class="dropdown profile_details_drop">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+											<div class="profile_img">	
+											
+												<div class="user-name">
+													<p>Mordi</p>
+													<span>Administrator</span>
+												</div>
+												<i class="fa fa-angle-down lnr"></i>
+												<i class="fa fa-angle-up lnr"></i>
+												<div class="clearfix"></div>	
+											</div>	
+										</a>
+										<ul class="dropdown-menu drp-mnu">
+											<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> 
+											<li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li> 
+											<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="clearfix"> </div>				
+						</div>
+				     <div class="clearfix"> </div>	
+				</div>
+<!--heder end here-->
+<!-- script-for sticky-nav -->
+		<script>
+		$(document).ready(function() {
+			 var navoffeset=$(".header-main").offset().top;
+			 $(window).scroll(function(){
+				var scrollpos=$(window).scrollTop(); 
+				if(scrollpos >=navoffeset){
+					$(".header-main").addClass("fixed");
+				}else{
+					$(".header-main").removeClass("fixed");
+				}
+			 });
+			 
+		});
+		</script>
+		<!-- /script-for sticky-nav -->
+<!--inner block start here-->
+<div class="inner-block">
+<!--market updates updates-->
+	 <div class="market-updates">
+			<div class="col-md-4 market-update-gd">
+				<div class="market-update-block clr-block-1">
+					<div class="col-md-8 market-update-left">
+						<h3 id="streetid"></h3>
+						<h4>Streets</h4>
+					
+					</div>
+					<div class="col-md-4 market-update-right">
+						<i class="fa fa-file-text-o"> </i>
+					</div>
+				  <div class="clearfix"> </div>
+				</div>
+			</div>
+			<div class="col-md-4 market-update-gd">
+				<div class="market-update-block clr-block-2">
+				 <div class="col-md-8 market-update-left">
+					<h3 id="animalsid"></h3>
+					<h4>Animals</h4>
+					
+				  </div>
+					<div class="col-md-4 market-update-right">
+						<i class="fa fa-eye"> </i>
+					</div>
+				  <div class="clearfix"> </div>
+				</div>
+			</div>
+			<div class="col-md-4 market-update-gd">
+				<div class="market-update-block clr-block-3">
+					<div class="col-md-8 market-update-left">
+					    <h3 id="eventsid"></h3>
+						
+						<h4>Events</h4>
+					
+					</div>
+					<div class="col-md-4 market-update-right">
+						<i class="fa fa-envelope-o"> </i>
+					</div>
+				  <div class="clearfix"> </div>
+				</div>
+			</div>
+		   <div class="clearfix"> </div>
+		</div>
+<!--market updates end here-->
+<!--mainpage chit-chating-->
+<div class="chit-chat-layer1">
+	<div class="col-md-12 chit-chat-layer1-left padd">
+               <div class="work-progres">
+                            <div class="chit-chat-heading">
+                                  City Map
+                                  
+                            </div>
+                            
+                            <div class="table-responsive">
+                            
+                <div id="floating-panel">
+     
+                 
+                 <div class="btn-group" role="group" aria-label="Basic example">
+                 	<div class="upload-btn-wrapper">
+					  <button class="btn">Import File</button>
+					  <input type="file" id="fileUpload" name="myfile"/>
+					</div>
+				  <button id="upload" type="button" class="btn btn-secondary" onclick="Upload()">Upload</button>
+		
+				  <button id="initll" type="button" class="btn btn-secondary"  onclick="initall()">Initial Map</button>
+				  <button type="button" class="btn btn-secondary" onclick="clearMarkers()">Hide Markers</button>
+				  <button type="button" class="btn btn-secondary" onclick="showMarkers()">Show Markers</button>
+				  <button type="button" class="btn btn-secondary" onclick="toggleStreetView()">Toggle Street</button>
+				</div>
+                            
+            	</div>
+                       	 <div class="col-sm-2">
+				                  <select id="animal" class="form-control" onchange="checkAnimal()">
+				                     <option value="" selected>All Animals</option>
+				                  </select>
+                				</div>
+                                <div class="col-sm-2">
+                                  <select id="event" class="form-control" onchange="checkEvent()">
+                               <option value="" selected>All Events</option>
+                                  </select>
+                                </div>     	
+                           <div id="map"></div>
+                			 </div>
+             </div>
+      </div>
+      
+   
+</div>
+<!--main page chit chating end here-->
+<!--main page chart start here-->
+ 
+<div class="main-page-charts">
+   <div class="main-page-chart-layer1">
+		<div class="col-md-6 chart-layer1-left"> 
+			<div class="glocy-chart">
+			<div class="span-2c">  
+			           
+                        <h3 class="tlt">Dates Analytics</h3>
+                         
+                        <canvas id="bar" height="300" width="400" style="width: 400px; height: 300px;"></canvas>
+                      
+                   
+              </div> 			  		   			
+			</div>
+		</div>
+	<div class="chart-layer-2">
+	
+	<div class="col-md-6 chart-layer2-right">
+			<div class="prograc-blocks">
+		     <!--Progress bars-->
+	        <div class="home-progres-main">
+	           <h3>Top Events</h3>
+	         </div>
+	        
+	        <script>
+// PIE  
+        </script>
+	        
+	        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+				<script src="/js/bars.js"></script>
+
+	      <!--//Progress bars-->
+	      </div>
+	</div>
+
+  
+</div>
+	 <div class="clearfix"> </div>
+  </div>
+ </div>
+<!--main page chart layer2-->
+
+
+<!--climate start here-->
+
+<!--climate end here-->
+</div>
+<!--inner block end here-->
+
+</div>
+</div>
+<!--slider menu-->
+    <div class="sidebar-menu">
+		  	<div class="logo"> <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a> <a href="#"> <span id="logo" ></span> 
+			      <!--<img id="logo" src="" alt="Logo"/>--> 
+			  </a> </div>		  
+		    <div class="menu">
+		      <ul id="menu" >
+		        <li id="menu-home" ><a href="/campgrounds/newindex"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
+		        <li><a href="#"><i  class="fa fa-map-marker"></i><span>Map</span><span class="fa fa-angle-right" style="float: right"></span></a>
+		          
+		        </li>
+		        <li id="menu-comunicacao" ><a href="#"><i class="fa fa-book nav_icon"></i><span>Management</span><span class="fa fa-angle-right" style="float: right"></span></a>
+		          <ul id="menu-comunicacao-sub" >
+		            <li id="menu-mensagens" style="width: 120px" ><a href="/campgrounds/animals">Animals</a>		              
+		            </li>
+		            <li id="menu-mensagens" ><a href="/campgrounds/events">Events</a></li>
+		            
+		          </ul>
+		        </li>
+		      </ul>
+		    </div>
+	 </div>
+	<div class="clearfix"> </div>
+</div>
+ 
+        
+        
+	
+<!--slide bar menu end here-->
+<script>
+var toggle = true;
+            
+$(".sidebar-icon").click(function() {                
+  if (toggle)
+  {
+    $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+    $("#menu span").css({"position":"absolute"});
+  }
+  else
+  {
+    $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+    setTimeout(function() {
+      $("#menu span").css({"position":"relative"});
+    }, 400);
+  }               
+                toggle = !toggle;
+            });
+</script>
+<!--scrolling js-->
+		<script src="/js/jquery.nicescroll.js"></script>
+		<script src="/js/scripts.js"></script>
+		<!--//scrolling js-->
+<script src="/js/bootstrap.js"> </script>
+<!-- mother grid end here-->
+
+<a href="javascript:void(0);" id="store">Store Array</a>
+<a href="javascript:void(0);" id="get">Get Array</a>
+<a href="javascript:void(0);" id="clear">Clear</a>
+<script>
+
+//read files
+
+    var fileUpload;
+             
+            function Upload() {
+                 fileUpload = document.getElementById("fileUpload");
+                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+                if (regex.test(fileUpload.value.toLowerCase())) {
+                    if (typeof (FileReader) != "undefined") {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            var table = document.createElement("table");
+                            var rows = e.target.result.split("\n");
+                            for (var i = 0; i < rows.length; i++) {
+                                var cells = rows[i].split(',');
+                                  
+                                         importedArr.push(cells);
+                                if (cells.length > 1) {
+                                    var row = table.insertRow(-1);
+                                  
+                                   
+                                    for (var j = 0; j < cells.length; j++) {
+                                        var cell = row.insertCell(-1);
+                                      
+                                        cell.innerHTML = cells[j];
+                                       
+                                    }
+                                }
+                            }
+                             
+                            var dvCSV = document.getElementById("dvCSV");
+                            dvCSV.innerHTML = "";
+                         //   dvCSV.appendChild(table);
+                        }
+                        reader.readAsText(fileUpload.files[0]);
+                    } else {
+                        alert("This browser does not support HTML5.");
+                    }
+                } else {
+                    alert("Please upload a valid CSV file.");
+                }
+              
+            }
+
+//
+var map;
+var panorama;
+var currentMarker;
+var markers = [];
+var markers2 = [];
+var markersToAdd = [];
+var allAnimals = [];
+var allCities = [];
+var allEvents = [];
+var allStreets = [];
+var curAnimals = [];
+var curEvents = [];
+var idMark = 1;
+var autoMarkers = [];
+var hashmap = new Map();
+var months = [];
+var newmarkersarray = [];
+var testArray = [1,2,3,4,5];
+$('#store').on('click', function(){
+    sessionStorage.setItem('myArray', testArray);
+});
+$('#get').on('click', function(){
+    var myArray = sessionStorage.getItem('myArray');
+    alert(myArray);
+});
+$('#clear').on('click', function(){
+    sessionStorage.clear();
+});
+/// graph
+   function loadHashMap() {
+    
+    for (var i=1 ; i<importedArr.length ; i++) {
+      
+        var date = importedArr[i][1];
+        if (date != null) {
+            var breakdate = date.split("/");
+            
+               for (var k=0 ; k<breakdate.length ; k++) {
+                   if (k == 1)  { // month
+                   
+                   // if (!allEvents.includes(words[k]) && words[k]!="")
+                     //  allEvents.push(words[k]);
+                        if (hashmap.get(breakdate[k]) != null) { // month key exists in hash map
+                             hashmap.set(breakdate[k],hashmap.get(breakdate[k])+1);
+                        }
+                        else { // month key doesnt exists in hash map
+                            hashmap.set(breakdate[k],1);
+                        }
+                   }
+                     
+               }
+        }
+        else continue;
+    }
+     
+        
+        for (var i = 1 ; i<=12 ; i++) {
+            if (hashmap.has(i.toString())) {
+                
+               // months.push(hashmap.get(i));
+               // months.push(hashmap.get(i.toString()));
+                months[i] = hashmap.get(i.toString());
+            }
+            else months[i] = 0;   
+        }
+       
+        
+        
+        startbar();
+}
+    function startbar() {
+                           
+                          
+                            var barChartData = {
+                            labels : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+                            datasets : [
+                                {
+                                    fillColor : "#FC8213",
+                                    data : [months[1],months[2],months[3],months[4],months[5],months[6],months[7],months[8],months[9],months[10],months[11],months[12]]
+                                },
+                                {
+                                    fillColor : "#337AB7",
+                                    data : [months[1],months[2],months[3],months[4],months[5],months[6],months[7],months[8],months[9],months[10],months[11],months[12]]
+                                }
+                            ]
+
+                        };
+                            new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+                }
+
+
+//
+
+
+// add all animals in file to array (for combo box)
+function printArr() {
+	console.log("all file : ");
+	console.log(importedArr);
+    for (var i=1 ; i< importedArr.length-1 ; i++) {
+    	console.log(i  +") x : "+importedArr[i][8] +", y : "+importedArr[i][9]);
+    	
+    }
+    addAllAnimals();
+
+}
+function addAllAnimals() {
+    
+    for (var i=1 ; i<importedArr.length ; i++) {
+      
+        var animal = importedArr[i][6];
+             if (!allAnimals.includes(animal) && animal!=null && animal != "")
+              allAnimals.push(animal);
+    }
+ 
+    fillComboAmimals();
+    fillBarAnimal();
+    loadHashMap();
+}
+function addAllStreets() {
+    
+    for (var i=1 ; i<importedArr.length ; i++) {
+      
+        var street = importedArr[i][2];
+             if (!allStreets.includes(street) && street!=null && street != "")
+              allStreets.push(street);
+    }
+ 
+   
+    fillBarStreet();
+}
+function addAllEvents() {
+    
+    for (var i=1 ; i<importedArr.length ; i++) {
+      
+        var event = importedArr[i][7];
+        if (event != null) {
+            var words = event.split(";");
+            
+               for (var k=0 ; k<words.length ; k++) {
+                   console.log("words["+k+"] is : "+words[k]);
+                    if (!allEvents.includes(words[k]) && words[k]!="")
+                       allEvents.push(words[k]);
+               }
+        }
+        else continue;
+
+             
+    }
+ 
+    fillComboEvents();
+    fillBarEvent();
+    startbar();
+    
+}
+
+/// up bars 
+function fillBarStreet() {
+    document.getElementById("streetid").innerHTML = allStreets.length;
+}
+function fillBarEvent() {
+    document.getElementById("eventsid").innerHTML = allEvents.length;
+}
+function fillBarAnimal() {
+    document.getElementById("animalsid").innerHTML = allAnimals.length;
+}
+function fillComboAmimals() {
+    document.getElementById('animal').options.length = 1;
+        var select = document.getElementById("animal");
+        for(var i = 0; i < allAnimals.length; i++) {
+        var opt = allAnimals[i];
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        select.appendChild(el);
+       }
+}
+function fillComboEvents() {
+    document.getElementById('event').options.length = 1;
+        var select = document.getElementById("event");
+        for(var i = 0; i < allEvents.length; i++) {
+        var opt = allEvents[i];
+        var el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        select.appendChild(el);
+       }
+}
+
+
+var selectedAnimal = "";
+var selectedEvent = "";
+function checkAnimal() {
+    var ddl = document.getElementById("animal");
+     selectedAnimal = ddl.options[ddl.selectedIndex].value;
+     console.log("selected animal : "+selectedAnimal);
+     if (selectedAnimal!="") {
+         console.log("in check animal");
+         initMap();
+     }
+     else  {
+     initall();
+     }
+     
+}
+function checkEvent() {
+    var ddl = document.getElementById("event");
+     selectedEvent = ddl.options[ddl.selectedIndex].value;
+     console.log("selected event : "+selectedEvent);
+     if (selectedEvent!="") {
+         console.log("in check event");
+         initMap();
+     }
+     else  {
+     initall();
+     }
+     
+}
+function initEmpty() {
+	   var newCenter = {lat: 31.98358, lng: 34.805888};
+     
+
+  
+     map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: newCenter,
+        scrollwheel: false,
+        streeViewtControl:false
+    });
+}
+ var hash = new Map();
+ var keys = [];
+var values = [];
+ function totalEvents() {
+		           
+		            for (var i=0 ; i<importedArr.length ; i++) {
+		                if (hash.get(importedArr[i][7]) != null) {
+		                    hash.set(importedArr[i][7],hash.get(importedArr[i][7])+1);
+		                }
+		                else {
+		                    hash.set(importedArr[i][7],1);
+		                }
+		            }
+		            console.log("hash keys : ");
+		            console.log(hash.keys());
+		            console.log("hash values : ");
+		            console.log(hash.values());
+		            var totalEv = [];
+		            var index = 0;
+		            const sortStringValues = (a, b) => a[1] === b[1] ? 0 : a[1] < b[1] ? 1 : -1
+		            var newhash = new Map([...hash].sort(sortStringValues));
+		            
+		            
+		            
+		            for (let [key, value] of newhash) {
+                         console.log(key + " - " + value);
+                         keys[index] = key;
+                         values[index] = value;
+                         index ++;
+                      }
+                      console.log("keys : ");
+                      console.log(keys);
+                      console.log("values : ");
+                      console.log(values);
+		            
+		        }
+
+function loadPie () {
+    var chart = new CanvasJS.Chart("chartContainer", {
+    	animationEnabled: true,
+    	title: {
+    		
+    	},
+    	data: [{
+    		type: "pie",
+    		startAngle: 240,
+    		yValueFormatString: "##0.00\"%\"",
+    		indexLabel: "{label} {y}",
+    		dataPoints: [
+    			{y: values[0], label:keys[0]},
+    			{y: values[1], label: keys[1]},
+    			{y: values[2], label: keys[2]},
+    			{y: values[3], label: keys[3]},
+    			{y: values[4], label: keys[4]}
+    		]
+    	}]
+    });
+    chart.render();
+
+}
+function valstr () {
+    return "morditest";
+}
+function initall() {
+        
+       addAllAnimals();
+       addAllEvents();
+       addAllStreets();
+	    totalEvents();
+	    loadPie ();
+      idMark = 0;
+      markersToAdd = [];
+      var testX = Number(importedArr[1][8]);
+      var testY = Number(importedArr[1][9]);
+      
+      
+       
+      var newCenter = {lat: 31.98358, lng: 34.805888};
+     
+
+
+
+    var center = {lat: testX, lng: testY };
+     map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: center,
+        scrollwheel: false,
+        streeViewtControl:false
+    });
+  
+ 
+    var input = document.getElementById('pac-input');
+        var searchBox = new google.maps.places.SearchBox(input);
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+        
+        //markers array should be here
+        
+        
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+          
+          // Clear out the old markers.
+          autoMarkers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+          
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+             
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+          
+           autoMarkers.push(new google.maps.Marker({
+              map: map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+           if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          map.fitBounds(bounds);
+        });
+          
+   
+   
+   
+    
+ 
+             
+        for (var i=0 ; i<importedArr.length ; i++) {
+            var x = Number(importedArr[i][8]);
+            var y = Number(importedArr[i][9]);
+        
+     
+       
+
+      
+      var coordsNew = {lat: x, lng: y};
+    
+       var myLatlng = new google.maps.LatLng(parseFloat(x),parseFloat(y));
+        var coords = myLatlng;
+            var id = importedArr[i][0];
+            var animal = importedArr[i][6];
+              var city = importedArr[i][4];
+        var event = importedArr[i][7];
+       var contentString = importedArr[i][5];   
+
+       
+       var fullMark = {coordsNew,contentString,idMark,id,animal};
+       idMark++;
+
+       if (selectedAnimal == animal) {
+          markersToAdd.push(fullMark);
+       }
+
+      
+           addMarker(fullMark);
+           markers.push(fullMark);
+
+    }
+    drawOnMap();
+    
+}
+  function initMap() {
+      idMark = 0;
+     
+      markersToAdd = [];
+      var testX = importedArr[1][8];
+      var testY = importedArr[1][9];
+       
+      var newCenter = {lat: Number(testX), lng: Number(testY)};
+     
+
+
+    var center = {lat: testX, lng: testY };
+     map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 12,
+        center: newCenter,
+        scrollwheel: false,
+        streeViewtControl:false
+    });
+     
+    
+   
+   
+   
+    
+        newmarkersarray = [];
+        curAnimals = [];
+        curEvents = [];
+        for (var i=0 ; i<importedArr.length ; i++) {
+            var x = Number(importedArr[i][8]);
+            var y= Number(importedArr[i][9]);
+        
+  
+         var coordsNew = {lat: x, lng: y};
+    
+         var myLatlng = new google.maps.LatLng(parseFloat(x),parseFloat(y));
+         var coords = myLatlng;
+                var id = importedArr[i][0];
+              var animal = importedArr[i][6];
+              var city = importedArr[i][4];
+              var event = importedArr[i][7];
+        
+       var contentString = importedArr[i][5];
+     
+
+       
+       var fullMark = {coordsNew,contentString,idMark,id,event,animal};
+       idMark++;
+
+           
+           if (selectedAnimal!="" && selectedAnimal == animal) {
+              
+              markersToAdd.push(fullMark);
+              curAnimals.push(fullMark);
+           }
+           if (selectedEvent != "" && selectedEvent == event && event != null) {
+              markersToAdd.push(fullMark);
+               curEvents.push(fullMark);
+           }
+           
+        
+          
+           
+           
+         markers = [];
+          
+         
+        }
+        if (selectedAnimal == "" || selectedEvent == "") {
+            for (var k = 0 ; k<markersToAdd.length ; k++) {
+           addMarker(markersToAdd[k]);
+           markers.push(markersToAdd[k]);
+              }
+        }
+        else {
+            markerExists2(curAnimals,curEvents);
+        }
+        console.log("new markers array : ");
+           console.log(newmarkersarray);
+           console.log("curAnimals : ");
+           console.log(curAnimals);
+           console.log("curEvents: ");
+           console.log(curEvents);
+           
+           newmarkersarray = [];
+           
+    drawOnMap();
+   
+  }
+    function markerExists2(curAnimals,curEvents) {
+        var toAdd = [];
+        console.log("in markers exists2");
+        console.log("cur animals in exists2 : ");
+        console.log(curAnimals);
+        for (var i=0 ; i<curAnimals.length ; i++) {
+            for (var j=0 ; j<curEvents.length ; j++) {
+                if (curAnimals[i].animal == curEvents[j].animal &&
+                    curAnimals[i].event == curEvents[j].event) {
+                        if (!toAdd.includes(curAnimals[i])) {
+                             toAdd.push(curAnimals[i]);
+                            continue;
+                        }
+                }
+            }
+        }
+        if (selectedAnimal == "") {
+            for (var i=0 ; i<curAnimals.length ; i++) {
+                toAdd.push(curAnimals[i]);
+            }
+        }
+        if (selectedEvent == "") {
+            console.log("inSide Here");
+            for (var i=0 ; i<curEvents.length ; i++) {
+                toAdd.push(curEvents[i]);
+            }
+        }
+        console.log("finaly !!! ");
+        console.log(toAdd);
+       
+        
+            
+        for (var k = 0 ; k<toAdd.length ; k++) {
+               addMarker(toAdd[k]);
+               markers.push(toAdd[k]);
+          }
+        toAdd = [];
+    }
+  
+    function markerExists(fullmark) {
+        for (var i=0 ; i<newmarkersarray.length ; i++) {
+            if (newmarkersarray[i].id == fullmark.id){
+                console.log("marker exists in array.");
+                return true;
+            }
+        }
+        return false;
+    }
+     function addMarker(fullMark) {
+    
+        var newcoords = fullMark.coordsNew;
+        
+        var marker = new google.maps.Marker({
+			position:fullMark.coordsNew,
+			map:map,
+			id:fullMark.idMark
+			//icon:props.image
+		});
+	      var infoWindow = new google.maps.InfoWindow({
+          content: fullMark.contentString
+        });
+        marker.addListener('click',function() {
+		infoWindow.open(map,marker);
+		currentMarker = marker;
+	
+	//	newcoords = currentMarker.position;
+
+
+		
+	    });
+	      markers2.push(marker);
+	    
+	     
+	    
+	  //  Panorama(fullMark.coordsNew);
+	
+	
+    }
+
+  function Panorama(newCenter) {
+      	
+		panorama = map.getStreetView();
+        panorama.setPosition(newCenter);
+        panorama.setPov(/** @type {google.maps.StreetViewPov} */({
+          heading: 265,
+          pitch: 0
+        }));
+  }
+  function drawOnMap() {
+     var drawingManager = new google.maps.drawing.DrawingManager({
+          drawingMode: google.maps.drawing.OverlayType.MARKER,
+          drawingControl: true,
+          drawingControlOptions: {
+            position: google.maps.ControlPosition.TOP_CENTER,
+            drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+          },
+          markerOptions: {icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
+          circleOptions: {
+            fillColor: '#ffff00',
+            fillOpacity: 1,
+            strokeWeight: 5,
+            clickable: false,
+            editable: true,
+            zIndex: 1
+          }
+        });
+        drawingManager.setMap(map); 
+  }
+  function clearMarkers(){
+      setMapOnAll(null);
+  }
+  function showMarkers() {
+       setMapOnAll(map);
+  }
+   function setMapOnAll(map) {
+        for (var i = 0; i < markers2.length; i++) {
+          markers2[i].setMap(map);
+        }
+    }
+    
+   function toggleStreetView() {
+       
+       
+       var toggleMarker = markers.find(findFunc);
+       function findFunc(mark) {
+           return mark.idMark === currentMarker.id;
+       }
+ 
+    
+      
+ 
+       Panorama(toggleMarker.coordsNew)
+        var toggle = panorama.getVisible();
+        if (toggle == false) {
+          panorama.setVisible(true);
+        } else {
+          panorama.setVisible(false);
+        }
+        if (panorama.getVisible() == true) {
+           // initPano();
+        }
+      }
+     function initPano() {
+        // Note: constructed panorama objects have visible: true
+        // set by default.
+       
+        var x = currentMarker.position.lat;
+        var y = currentMarker.position.lng;
+        var c = {lat: x, lng: y};
+
+       
+        var panorama = new google.maps.StreetViewPanorama(
+            document.getElementById('map'), {
+              position: c,
+              addressControlOptions: {
+                position: google.maps.ControlPosition.BOTTOM_CENTER
+              },
+              linksControl: false,
+              panControl: false,
+              enableCloseButton: false
+        });
+      }
+        
+        function draw() {
+             var drawingManager = new google.maps.drawing.DrawingManager({
+          drawingMode: google.maps.drawing.OverlayType.MARKER,
+          drawingControl: true,
+          drawingControlOptions: {
+            position: google.maps.ControlPosition.TOP_CENTER,
+            drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+          },
+          markerOptions: {icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
+          circleOptions: {
+            fillColor: '#ffff00',
+            fillOpacity: 1,
+            strokeWeight: 5,
+            clickable: false,
+            editable: true,
+            zIndex: 1
+          }
+        });
+        drawingManager.setMap(map);
+        }
+        
+        // autocopmplete search
+        
+        
+        
+        //
+</script >
+
+
+
+
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnITLYBW7DT4L3XhU33Qt46GJWOCbKlDk&callback=initEmpty&libraries=drawing,places"></script>
+
+
+	
+	
+</body>
+</html>                     
